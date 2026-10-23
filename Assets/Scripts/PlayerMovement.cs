@@ -29,7 +29,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (Keyboard.current.dKey.isPressed){
               moveDirection = moveDirection +  new Vector3(1,0,0) ;
-        }   
+        }
+
+        if (moveDirection != Vector3.zero){
+        Quaternion targetRotation = Quaternion.LookRotation(moveDirection);   
+        }
+
 
         transform.Translate(
              moveDirection.normalized * moveSpeed * Time.deltaTime
