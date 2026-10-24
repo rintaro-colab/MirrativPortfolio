@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5.0f;
+    public float rotationSpeed = 10.0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,11 +34,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (moveDirection != Vector3.zero){
         Quaternion targetRotation = Quaternion.LookRotation(moveDirection);   
+
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
 
         transform.Translate(
-             moveDirection.normalized * moveSpeed * Time.deltaTime
+             moveDirection.normalized * moveSpeed * Time.deltaTime, Space.World
         );
+        
     }
 }
